@@ -16,7 +16,7 @@ export function SubscriptButton({ editor }: { editor: Editor }) {
       icon={Subscript}
       text="下标"
       pressed={isActive}
-      onClick={() => editor.chain().focus().toggleSubscript().run()}
+      onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
     />
   );
 }

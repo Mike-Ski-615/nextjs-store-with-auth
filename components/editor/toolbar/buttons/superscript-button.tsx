@@ -16,7 +16,7 @@ export function SuperscriptButton({ editor }: { editor: Editor }) {
       icon={Superscript}
       text="上标"
       pressed={isActive}
-      onClick={() => editor.chain().focus().toggleSuperscript().run()}
+      onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
     />
   );
 }
