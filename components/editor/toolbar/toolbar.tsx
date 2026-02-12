@@ -8,6 +8,8 @@ import { ItalicButton } from "./buttons/Italic-button";
 import { UnderlineButton } from "./buttons/Underline-button";
 import { StrikeButton } from "./buttons/Strike-button";
 import { CodeButton } from "./buttons/Code-button";
+import { SubscriptButton } from "./buttons/subscript-button";
+import { SuperscriptButton } from "./buttons/superscript-button";
 import { ColorHighlightPopover } from "./buttons/Color-highlight-popover";
 import { ColorTextPopover } from "./buttons/Color-text-popover";
 import { TextAlignButton } from "./buttons/Text-align-button";
@@ -41,6 +43,8 @@ export function Toolbar({ editor }: { editor: Editor }) {
         <UnderlineButton editor={editor} />
         <StrikeButton editor={editor} />
         <CodeButton editor={editor} />
+        <SubscriptButton editor={editor} />
+        <SuperscriptButton editor={editor} />
       </div>
 
       <Separator orientation="vertical" className="h-6 mx-1" />

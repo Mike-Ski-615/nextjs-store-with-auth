@@ -12,6 +12,8 @@ import TaskList from "@tiptap/extension-task-list";
 import TaskItem from "@tiptap/extension-task-item";
 import Image from "@tiptap/extension-image";
 import Mathematics from "@tiptap/extension-mathematics";
+import Subscript from "@tiptap/extension-subscript";
+import Superscript from "@tiptap/extension-superscript";
 import { CellAlign } from "../components/editor/extensions/cell-align";
 import { TableKit } from "@tiptap/extension-table";
 import type { Editor } from "@tiptap/react";
@@ -68,6 +70,20 @@ export const getTiptapExtensions = (editor?: Editor | null) => [
   TextAlign.configure({
     types: ["heading", "paragraph"], // 指定哪些节点类型支持文本对齐：标题和段落
   }),
+
+  /**
+   * Subscript - 下标扩展
+   * 将文本显示为下标，如化学式 H₂O
+   * 快捷键：Ctrl/Cmd + ,
+   */
+  Subscript,
+
+  /**
+   * Superscript - 上标扩展
+   * 将文本显示为上标，如数学式 x²
+   * 快捷键：Ctrl/Cmd + .
+   */
+  Superscript,
 
   /**
    * TaskList - 任务列表扩展
