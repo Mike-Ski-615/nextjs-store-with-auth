@@ -2,7 +2,7 @@
 
 import { useEditor, EditorContent } from "@tiptap/react";
 import { getTiptapExtensions } from "@/lib/tiptap-extensions";
-import { Toolbar } from "./editor/header/toolbar";
+import { Toolbar } from "./editor/toolbar/toolbar";
 import "katex/dist/katex.min.css";
 
 const Tiptap = () => {

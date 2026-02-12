@@ -1,25 +1,25 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
-import { UndoRedoButton } from "./menu-button/Undo-redo-button";
-import { TurnIntoDropdown } from "./menu-button/Turn-Into-dropdown";
-import { BoldButton } from "./menu-button/Bold-button";
-import { ItalicButton } from "./menu-button/Italic-button";
-import { UnderlineButton } from "./menu-button/Underline-button";
-import { StrikeButton } from "./menu-button/Strike-button";
-import { CodeButton } from "./menu-button/Code-button";
-import { ColorHighlightPopover } from "./menu-button/Color-highlight-popover";
-import { ColorTextPopover } from "./menu-button/Color-text-popover";
-import { TextAlignButton } from "./menu-button/Text-align-button";
-import { ListDropdownMenu } from "./menu-button/List-dropdown-menu";
-import { BlockquoteButton } from "./menu-button/Blockquote-button";
-import { CodeBlockButton } from "./menu-button/Code-block-button";
-import { LinkPopover } from "./menu-button/Link-popover";
-import { ImageUploadButton } from "./menu-button/Image-upload-button";
-import { MathButton } from "./menu-button/Math-button";
-import { TablePopover } from "./menu-button/Table-popover";
-import { TableOperationsDropdown } from "./menu-button/Table-operations-dropdown";
-import { TaskListOperationsDropdown } from "./menu-button/TaskList-operations-dropdown";
+import { UndoRedoButton } from "./buttons/Undo-redo-button";
+import { TurnIntoDropdown } from "./buttons/Turn-Into-dropdown";
+import { BoldButton } from "./buttons/Bold-button";
+import { ItalicButton } from "./buttons/Italic-button";
+import { UnderlineButton } from "./buttons/Underline-button";
+import { StrikeButton } from "./buttons/Strike-button";
+import { CodeButton } from "./buttons/Code-button";
+import { ColorHighlightPopover } from "./buttons/Color-highlight-popover";
+import { ColorTextPopover } from "./buttons/Color-text-popover";
+import { TextAlignButton } from "./buttons/Text-align-button";
+import { ListDropdownMenu } from "./buttons/List-dropdown-menu";
+import { BlockquoteButton } from "./buttons/Blockquote-button";
+import { CodeBlockButton } from "./buttons/Code-block-button";
+import { LinkPopover } from "./buttons/Link-popover";
+import { ImageUploadButton } from "./buttons/Image-upload-button";
+import { MathButton } from "./buttons/Math-button";
+import { TablePopover } from "./buttons/Table-popover";
+import { TableOperationsDropdown } from "./buttons/Table-operations-dropdown";
+import { TaskListOperationsDropdown } from "./buttons/TaskList-operations-dropdown";
 import { Editor } from "@tiptap/react";
 
 export function Toolbar({ editor }: { editor: Editor }) {
