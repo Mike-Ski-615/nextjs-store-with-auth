@@ -1,14 +1,22 @@
 "use client";
 
-import { Editor } from "@tiptap/react";
+import { Editor, useEditorState } from "@tiptap/react";
 
 interface CharacterCountProps {
   editor: Editor;
 }
 
 export function CharacterCount({ editor }: CharacterCountProps) {
-  const characters = editor.storage.characterCount.characters();
-  const words = editor.storage.characterCount.words();
+  // 使用 useEditorState 来响应式地获取字符计数
+  const characters = useEditorState({
+    editor,
+    selector: (ctx) => ctx.editor.storage.characterCount.characters(),
+  });
+
+  const words = useEditorState({
+    editor,
+    selector: (ctx) => ctx.editor.storage.characterCount.words(),
+  });
 
   return (
     <div className="flex items-center gap-4 px-4 py-2 text-sm text-muted-foreground border-t">
