@@ -20,7 +20,7 @@ const Tiptap = () => {
     editorProps: {
       attributes: {
         class:
-          "tiptap prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none mt-2 px-2 min-h-[200px]",
+          "tiptap prose prose-sm sm:prose lg:prose-lg xl:prose-2xl focus:outline-none min-h-[200px]",
       },
     },
   });
