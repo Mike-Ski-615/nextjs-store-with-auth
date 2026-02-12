@@ -41,6 +41,10 @@ export const getTiptapExtensions = (editor?: Editor | null) => [
         class: "!text-blue-500 !underline !cursor-pointer", // 链接的样式类名：蓝色、下划线、指针光标
       },
     },
+    dropcursor: {
+      color: "hsl(var(--primary))", // 使用主题色作为拖放光标颜色
+      width: 2, // 光标宽度（像素）
+    },
   }),
 
   /**

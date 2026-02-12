@@ -352,4 +352,13 @@
     background-color: rgba(112, 207, 248, 0.31);
     border-radius: 0.2rem;
   }
+
+  /* Dropcursor 样式 - 拖放时显示的光标指示器 */
+  .ProseMirror-dropcursor {
+    @apply border-l-2 border-primary;
+    pointer-events: none;
+    position: absolute;
+    height: 1.2em;
+    margin-top: -0.1em;
+  }
 }
