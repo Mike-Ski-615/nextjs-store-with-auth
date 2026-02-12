@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "../next-tiptap-3/src/components/tiptap-editor/components/provider.tsx"  ],
   "exclude": ["node_modules"]
 }
