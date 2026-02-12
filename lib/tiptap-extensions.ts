@@ -14,6 +14,7 @@ import Image from "@tiptap/extension-image";
 import Mathematics from "@tiptap/extension-mathematics";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
+import CharacterCount from "@tiptap/extension-character-count";
 import { CellAlign } from "../components/editor/extensions/cell-align";
 import { TableKit } from "@tiptap/extension-table";
 import type { Editor } from "@tiptap/react";
@@ -248,4 +249,11 @@ export const getTiptapExtensions = (editor?: Editor | null) => [
       },
     },
   }),
+
+  /**
+   * CharacterCount - 字符计数扩展
+   * 统计文档中的字符数和单词数
+   * 不限制长度，仅用于显示统计信息
+   */
+  CharacterCount,
 ];

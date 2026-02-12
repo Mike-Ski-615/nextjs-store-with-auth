@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import { getTiptapExtensions } from "@/lib/tiptap-extensions";
 import { Toolbar } from "./editor/toolbar/toolbar";
+import { CharacterCount } from "./editor/character-count";
 import "katex/dist/katex.min.css";
 
 const Tiptap = () => {
@@ -33,6 +34,7 @@ const Tiptap = () => {
       <div className="flex-1 overflow-y-auto">
         <EditorContent editor={editor} />
       </div>
+      <CharacterCount editor={editor} />
     </div>
   );
 };
