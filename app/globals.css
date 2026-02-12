@@ -291,4 +291,21 @@
   .tiptap ul[data-type="taskList"] ul[data-type="taskList"] {
     @apply mt-2 ml-6;
   }
+
+  /* 拖拽手柄样式 */
+  .drag-handle {
+    @apply flex items-center justify-center w-6 h-6 cursor-grab rounded hover:bg-accent transition-colors;
+  }
+
+  .drag-handle:active {
+    @apply cursor-grabbing;
+  }
+
+  .drag-handle svg {
+    @apply text-muted-foreground;
+  }
+
+  .drag-handle:hover svg {
+    @apply text-foreground;
+  }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEditor, EditorContent } from "@tiptap/react";
+import DragHandle from "@tiptap/extension-drag-handle-react";
 import { getTiptapExtensions } from "@/lib/tiptap-extensions";
 import { Toolbar } from "./editor/toolbar/toolbar";
 import { CharacterCount } from "./editor/character-count";
@@ -32,6 +33,28 @@ const Tiptap = () => {
     <div className="flex flex-col h-full overflow-hidden">
       <Toolbar editor={editor} />
       <div className="flex-1 overflow-y-auto">
+        <DragHandle editor={editor} nested={{ edgeDetection: { threshold: -16 } }}>
+          <div className="drag-handle">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="9" cy="5" r="1" />
+              <circle cx="9" cy="12" r="1" />
+              <circle cx="9" cy="19" r="1" />
+              <circle cx="15" cy="5" r="1" />
+              <circle cx="15" cy="12" r="1" />
+              <circle cx="15" cy="19" r="1" />
+            </svg>
+          </div>
+        </DragHandle>
         <EditorContent editor={editor} />
       </div>
       <CharacterCount editor={editor} />
