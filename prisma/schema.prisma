@@ -24,6 +24,14 @@ model User {
   sessions      Session[]
   accounts      Account[]
 
+  // Document relations
+  ownedDocuments       Document[]         @relation("DocumentOwner")
+  editedDocuments      Document[]         @relation("DocumentEditor")
+  collaborations       Collaborator[]
+  invitedCollaborators Collaborator[]     @relation("CollaboratorInviter")
+  snapshots            DocumentSnapshot[]
+  activeSessions       ActiveSession[]
+
   @@unique([email])
   @@map("user")
 }
@@ -74,4 +82,87 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+enum PermissionLevel {
+  OWNER  // 文档所有者
+  ADMIN  // 管理员
+  WRITE  // 编辑者
+  READ   // 查看者
+}
+
+model Document {
+  id             String             @id @default(cuid())
+  filename       String
+  description    String?
+  yjsState       Bytes?
+  ownerId        String
+  owner          User               @relation("DocumentOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  lastAccessedAt DateTime           @default(now())
+  updateCount    Int                @default(0)
+  lastEditedBy   String?
+  lastEditor     User?              @relation("DocumentEditor", fields: [lastEditedBy], references: [id])
+  
+  collaborators  Collaborator[]
+  snapshots      DocumentSnapshot[]
+  activeSessions ActiveSession[]
+  
+  @@index([ownerId])
+  @@index([updatedAt])
+  @@index([createdAt])
+  @@index([filename])
+  @@index([ownerId, updatedAt])
+  @@map("document")
+}
+
+model Collaborator {
+  id         String          @id @default(cuid())
+  documentId String
+  document   Document        @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  permission PermissionLevel @default(READ)
+  invitedAt  DateTime        @default(now())
+  invitedBy  String
+  inviter    User            @relation("CollaboratorInviter", fields: [invitedBy], references: [id])
+  
+  @@unique([documentId, userId])
+  @@index([userId])
+  @@index([documentId])
+  @@map("collaborator")
+}
+
+model DocumentSnapshot {
+  id          String   @id @default(cuid())
+  documentId  String
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  yjsState    Bytes
+  description String?
+  createdAt   DateTime @default(now())
+  createdBy   String
+  creator     User     @relation(fields: [createdBy], references: [id])
+  
+  @@index([documentId])
+  @@index([createdAt])
+  @@map("document_snapshot")
+}
+
+model ActiveSession {
+  id           String   @id @default(cuid())
+  documentId   String
+  document     Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  connectedAt  DateTime @default(now())
+  lastActiveAt DateTime @default(now())
+  isActive     Boolean  @default(true)
+  
+  @@unique([documentId, userId])
+  @@index([documentId])
+  @@index([userId])
+  @@index([lastActiveAt])
+  @@index([documentId, lastActiveAt])
+  @@map("active_session")
 }

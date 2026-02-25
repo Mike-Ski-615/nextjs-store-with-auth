@@ -1,9 +1,10 @@
 "use client";
 
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { MenuButton } from "../../menu-button";
-import { List, ListChecks, ListOrdered } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
+import { List, ListChecks, ListOrdered } from "lucide-react";
+
+import { MenuButton } from "@/components/editor/menu-button";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export function ListDropdownMenu({ editor }: { editor: Editor }) {
   const isActive = useEditorState({

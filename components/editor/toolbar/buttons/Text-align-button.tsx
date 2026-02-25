@@ -1,9 +1,10 @@
 "use client";
 
-import { ToggleGroup } from "@/components/ui/toggle-group";
-import { MenuButton } from "../../menu-button";
-import { AlignCenter, AlignJustify, AlignLeft, AlignRight } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
+import { AlignLeft, AlignRight, AlignCenter, AlignJustify } from "lucide-react";
+
+import { ToggleGroup } from "@/components/ui/toggle-group";
+import { MenuButton } from "@/components/editor/menu-button";
 
 export function TextAlignButton({ editor }: { editor: Editor }) {
   const currentAlign = useEditorState({

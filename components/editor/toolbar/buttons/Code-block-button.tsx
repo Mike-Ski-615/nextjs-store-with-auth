@@ -1,8 +1,9 @@
 "use client";
 
 import { CodeSquare } from "lucide-react";
-import { MenuButton } from "../../menu-button";
 import { Editor, useEditorState } from "@tiptap/react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 
 export function CodeBlockButton({ editor }: { editor: Editor }) {
   const isActive = useEditorState({
@@ -12,6 +13,7 @@ export function CodeBlockButton({ editor }: { editor: Editor }) {
 
   return (
     <MenuButton
+      type="button"
       icon={CodeSquare}
       pressed={isActive}
       onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}

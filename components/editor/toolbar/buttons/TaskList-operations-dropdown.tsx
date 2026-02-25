@@ -1,13 +1,14 @@
 "use client";
 
-import {
-  ListChecks,
-  Split,
-  IndentIncrease,
-  IndentDecrease,
-} from "lucide-react";
-import { MenuButton } from "../../menu-button";
 import { Editor, useEditorState } from "@tiptap/react";
+import {
+  Split,
+  ListChecks,
+  IndentDecrease,
+  IndentIncrease,
+} from "lucide-react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export function TaskListOperationsDropdown({ editor }: { editor: Editor }) {

@@ -1,8 +1,9 @@
 "use client";
 
-import { MenuButton } from "../../menu-button";
 import { Strikethrough } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 
 export function StrikeButton({ editor }: { editor: Editor }) {
   const isActive = useEditorState({
@@ -12,7 +13,7 @@ export function StrikeButton({ editor }: { editor: Editor }) {
 
   return (
     <MenuButton
-      
+      type="button"
       icon={Strikethrough}
       pressed={isActive}
       onPressedChange={() => editor.chain().focus().toggleStrike().run()}

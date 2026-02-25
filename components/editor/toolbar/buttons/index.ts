@@ -1,0 +1,24 @@
+// Toolbar buttons barrel export
+export { BoldButton } from "./bold-button";
+export { ItalicButton } from "./italic-button";
+export { UnderlineButton } from "./underline-button";
+export { StrikeButton } from "./strike-button";
+export { CodeButton } from "./code-button";
+export { CodeBlockButton } from "./code-block-button";
+export { BlockquoteButton } from "./blockquote-button";
+export { ScriptButton } from "./script-button";
+export { ColorTextPopover } from "./color-text-popover";
+export { ColorHighlightPopover } from "./color-highlight-popover";
+export { LineHeightDropdown } from "./line-height-dropdown";
+export { TextAlignButton } from "./text-align-button";
+export { ListDropdownMenu } from "./list-dropdown-menu";
+export { HorizontalRuleButton } from "./horizontal-rule-button";
+export { HardBreakButton } from "./hard-break-button";
+export { LinkPopover } from "./link-popover";
+export { ImageUploadButton } from "./image-upload-button";
+export { MathButton } from "./math-button";
+export { TablePopover } from "./table-popover";
+export { TableOperationsDropdown } from "./table-operations-dropdown";
+export { TaskListOperationsDropdown } from "./tasklist-operations-dropdown";
+export { TurnIntoDropdown } from "./turn-into-dropdown";
+export { UndoRedoButton } from "./undo-redo-button";

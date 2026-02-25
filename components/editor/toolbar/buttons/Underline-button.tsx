@@ -1,8 +1,9 @@
 "use client";
 
-import { MenuButton } from "../../menu-button";
 import { Underline } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 
 export function UnderlineButton({ editor }: { editor: Editor }) {
   const isActive = useEditorState({
@@ -12,6 +13,7 @@ export function UnderlineButton({ editor }: { editor: Editor }) {
 
   return (
     <MenuButton
+      type="button"
       icon={Underline}
       pressed={isActive}
       onPressedChange={() => editor.chain().focus().toggleUnderline().run()}

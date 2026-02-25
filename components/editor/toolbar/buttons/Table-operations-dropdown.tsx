@@ -1,20 +1,21 @@
 "use client";
 
-import {
-  Table,
-  Columns,
-  Rows,
-  Trash2,
-  Minus,
-  Merge,
-  Split,
-  Heading,
-  ArrowRight,
-  ArrowLeft,
-  Wrench,
-} from "lucide-react";
-import { MenuButton } from "../../menu-button";
 import { Editor, useEditorState } from "@tiptap/react";
+import {
+  Rows,
+  Merge,
+  Minus,
+  Split,
+  Table,
+  Trash2,
+  Wrench,
+  Columns,
+  Heading,
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 export function TableOperationsDropdown({ editor }: { editor: Editor }) {

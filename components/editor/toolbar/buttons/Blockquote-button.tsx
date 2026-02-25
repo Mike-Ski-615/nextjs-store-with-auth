@@ -1,8 +1,9 @@
 "use client";
 
 import { Quote } from "lucide-react";
-import { MenuButton } from "../../menu-button";
 import { Editor, useEditorState } from "@tiptap/react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 
 export function BlockquoteButton({ editor }: { editor: Editor }) {
   const isActive = useEditorState({
@@ -12,6 +13,7 @@ export function BlockquoteButton({ editor }: { editor: Editor }) {
 
   return (
     <MenuButton
+      type="button"
       icon={Quote}
       pressed={isActive}
       onPressedChange={() => editor.chain().focus().toggleBlockquote().run()}

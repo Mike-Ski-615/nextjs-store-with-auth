@@ -1,27 +1,28 @@
 "use client";
 
+import { z } from "zod";
+import Link from "next/link";
+import { toast } from "sonner";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, Controller } from "react-hook-form";
+
+import { Input } from "@/components/ui/input";
+import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
+  CardTitle,
+  CardHeader,
   CardContent,
   CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldDescription,
 } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { toast } from "sonner";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email({ message: "请输入正确的邮箱地址" }),
@@ -47,7 +48,7 @@ export function ForgotPasswordForm() {
           toast.success("验证码已发送，请检查您的邮箱");
         },
         onError: (ctx) => {
-          toast.error(ctx.error.message || "发送验证码失败");
+          toast.error(ctx.error.message);
         },
       },
     );

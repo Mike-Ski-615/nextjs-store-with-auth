@@ -1,10 +1,11 @@
 "use client";
 
-import { Palette, Ban } from "lucide-react";
-import { MenuButton } from "../../menu-button";
+import { Ban,Palette } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
-import { Separator } from "@/components/ui/separator";
+
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { MenuButton } from "@/components/editor/menu-button";
 
 const TEXT_COLORS = [
   { color: "#000000" },

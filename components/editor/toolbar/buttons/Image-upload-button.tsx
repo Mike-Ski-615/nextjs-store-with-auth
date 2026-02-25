@@ -1,9 +1,10 @@
 "use client";
 
-import { MenuButton } from "../../menu-button";
-import { Image as ImageIcon } from "lucide-react";
 import { useCallback } from "react";
+import { Image as ImageIcon } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
+
+import { MenuButton } from "@/components/editor/menu-button";
 
 export function ImageUploadButton({ editor }: { editor: Editor }) {
   const isActive = useEditorState({
@@ -12,8 +13,7 @@ export function ImageUploadButton({ editor }: { editor: Editor }) {
   });
 
   const addImage = useCallback(() => {
-    const url = window.prompt('URL');
-
+    const url = window.prompt("URL");
     if (url) {
       editor.chain().focus().setImage({ src: url }).run();
     }
@@ -21,6 +21,7 @@ export function ImageUploadButton({ editor }: { editor: Editor }) {
 
   return (
     <MenuButton
+      type="button"
       icon={ImageIcon}
       pressed={isActive}
       onPressedChange={addImage}

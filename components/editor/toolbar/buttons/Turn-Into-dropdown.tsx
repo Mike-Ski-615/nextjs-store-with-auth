@@ -1,5 +1,6 @@
 "use client";
 
+import { Editor, useEditorState } from "@tiptap/react";
 import {
   Heading,
   Heading1,
@@ -9,10 +10,9 @@ import {
   Heading5,
   Heading6,
 } from "lucide-react";
-import { MenuButton } from "../../menu-button";
-import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
-import { Editor, useEditorState } from "@tiptap/react";
 
+import { MenuButton } from "@/components/editor/menu-button";
+import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 type Level = 1 | 2 | 3 | 4 | 5 | 6;
 
 const HEADING_CONFIG = [

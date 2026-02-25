@@ -1,10 +1,11 @@
 "use client";
 
-import { Highlighter, Ban } from "lucide-react";
-import { MenuButton } from "../../menu-button";
+import { Ban,Highlighter } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
-import { Separator } from "@/components/ui/separator";
+
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { MenuButton } from "@/components/editor/menu-button";
 
 const HIGHLIGHT_COLORS = [
   { color: "#fb923c" },
@@ -19,7 +20,6 @@ export function ColorHighlightPopover({ editor }: { editor: Editor }) {
     editor,
     selector: (ctx) => ctx.editor.isActive("highlight"),
   });
-
 
   return (
     <MenuButton

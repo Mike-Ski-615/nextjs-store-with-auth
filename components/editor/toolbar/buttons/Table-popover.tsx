@@ -1,11 +1,13 @@
 "use client";
-
 import { Table } from "lucide-react";
-import { MenuButton } from "../../menu-button";
-import { Editor, useEditorState } from "@tiptap/react";
-import { useState, useMemo } from "react";
-import { cn } from "@/lib/utils";
 import { PopoverClose } from "@radix-ui/react-popover";
+import { Editor, useEditorState } from "@tiptap/react";
+import { useMemo, useState, useCallback } from "react";
+
+import { cn } from "@/lib/utils";
+import { MenuButton } from "@/components/editor/menu-button";
+
+
 
 const COLUMNS = 7;
 const ROWS = 5;
@@ -18,16 +20,19 @@ export function TablePopover({ editor }: { editor: Editor }) {
     selector: (ctx) => ctx.editor.isActive("table"),
   });
 
-  const isActiveCell = (rowIndex: number, colIndex: number) =>
-    rowIndex < gridSize.rows && colIndex < gridSize.cols;
+  const isActiveCell = useCallback(
+    (rowIndex: number, colIndex: number) =>
+      rowIndex < gridSize.rows && colIndex < gridSize.cols,
+    [gridSize]
+  );
 
-  const handleCellClick = () => {
+  const handleCellClick = useCallback(() => {
     editor
       .chain()
       .focus()
       .insertTable({ rows: gridSize.rows, cols: gridSize.cols, withHeaderRow: true })
       .run();
-  };
+  }, [editor, gridSize]);
 
   const grid = useMemo(
     () =>
@@ -50,7 +55,7 @@ export function TablePopover({ editor }: { editor: Editor }) {
           ))}
         </div>
       )),
-    [gridSize]
+    [handleCellClick, isActiveCell]
   );
 
   return (

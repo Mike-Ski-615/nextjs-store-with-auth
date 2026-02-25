@@ -61,8 +61,6 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -75,16 +73,16 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(0.97 0.01 17);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -101,6 +99,8 @@
   --code-number: oklch(0.56 0 0);
   --selection: oklch(0.145 0 0);
   --selection-foreground: oklch(1 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
 }
 
 .dark {
@@ -110,7 +110,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
+  --primary: oklch(0.87 0.00 0);
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -123,11 +123,11 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --chart-1: oklch(0.809 0.105 251.813);
+  --chart-2: oklch(0.623 0.214 259.815);
+  --chart-3: oklch(0.546 0.245 262.881);
+  --chart-4: oklch(0.488 0.243 264.376);
+  --chart-5: oklch(0.424 0.199 265.638);
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -135,7 +135,7 @@
   --sidebar-accent: oklch(0.269 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.439 0 0);
+  --sidebar-ring: oklch(0.556 0 0);
   --surface: oklch(0.2 0 0);
   --surface-foreground: oklch(0.708 0 0);
   --code: var(--surface);
@@ -146,18 +146,13 @@
   --selection-foreground: oklch(0.205 0 0);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
 
-  html {
-    @apply overscroll-y-none;
-  }
-
   body {
-    @apply bg-background text-foreground w-screen h-screen overflow-x-hidden;
+    @apply bg-background text-foreground min-h-screen overflow-x-hidden;
   }
 
   ::selection {
@@ -168,7 +163,6 @@
   button:active {
     @apply opacity-60 md:opacity-100;
   }
-
 
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -182,183 +176,5 @@
 
   &::-webkit-scrollbar {
     display: none;
-  }
-}
-
-/* Tiptap 表格特殊样式 */
-@layer components {
-  /* 表格单元格最小宽度 */
-  .tiptap table td,
-  .tiptap table th {
-    min-width: 1em;
-    box-sizing: border-box;
-    position: relative;
-  }
-
-  /* 单元格内容样式 */
-  .tiptap table td > *,
-  .tiptap table th > * {
-    @apply mb-0;
-  }
-
-  /* 选中的单元格样式 */
-  .tiptap table .selectedCell {
-    @apply bg-primary/10 border-primary;
-  }
-
-  /* 列调整大小手柄 */
-  .tiptap table .column-resize-handle {
-    @apply absolute -right-0.5 top-0 -bottom-0.5 w-1 bg-primary pointer-events-none opacity-0 transition-opacity duration-200;
-  }
-
-  /* 鼠标悬停时显示调整手柄 */
-  .tiptap table:hover .column-resize-handle {
-    @apply opacity-30;
-  }
-
-  /* 正在调整大小时的光标 */
-  .tiptap table.resize-cursor {
-    cursor: col-resize;
-  }
-
-  /* 调整大小时手柄完全显示 */
-  .tiptap table.resize-cursor .column-resize-handle {
-    @apply opacity-100;
-  }
-
-  /* 表格工具栏按钮组样式（可选） */
-  .table-controls {
-    @apply flex flex-wrap gap-2 mb-4 p-3 bg-muted rounded-md border border-border;
-  }
-
-  .table-controls button {
-    @apply px-3 py-2 text-sm font-medium text-foreground bg-background border border-border rounded-md cursor-pointer transition-all duration-200;
-  }
-
-  .table-controls button:hover:not(:disabled) {
-    @apply bg-accent border-accent-foreground/20;
-  }
-
-  .table-controls button:active:not(:disabled) {
-    @apply bg-accent/80;
-  }
-
-  .table-controls button:disabled {
-    @apply opacity-50 cursor-not-allowed;
-  }
-
-  /* 响应式设计 */
-  @media (max-width: 640px) {
-    .tiptap table {
-      @apply text-sm;
-    }
-
-    .tiptap table td,
-    .tiptap table th {
-      @apply px-2 py-1.5;
-    }
-  }
-
-  /* 任务列表样式 - 子元素和特殊选择器 */
-  .tiptap ul[data-type="taskList"] li > label {
-    margin-top: 2px;
-  }
-
-  .tiptap ul[data-type="taskList"] li > label > span {
-    display: none;
-  }
-
-  .tiptap ul[data-type="taskList"] li > div > * {
-    margin: 0 !important;
-  }
-
-  .tiptap ul[data-type="taskList"] li input[type="checkbox"] {
-    @apply w-4 h-4 cursor-pointer rounded border-border;
-  }
-
-  .tiptap ul[data-type="taskList"] li[data-checked="true"] > div {
-    @apply line-through text-muted-foreground;
-  }
-
-  .tiptap ul[data-type="taskList"] li input[type="checkbox"] {
-    @apply w-4 h-4 cursor-pointer rounded border-border;
-  }
-
-  .tiptap ul[data-type="taskList"] li[data-checked="true"] > div {
-    @apply line-through text-muted-foreground;
-  }
-
-  .tiptap ul[data-type="taskList"] ul[data-type="taskList"] {
-    @apply mt-2 ml-6;
-  }
-
-  /* 拖拽手柄样式 */
-  .drag-handle {
-    @apply flex items-center justify-center w-6 h-6 cursor-grab rounded hover:bg-accent transition-colors;
-  }
-
-  .drag-handle:active {
-    @apply cursor-grabbing;
-  }
-
-  .drag-handle svg {
-    @apply text-muted-foreground;
-  }
-
-  .drag-handle:hover svg {
-    @apply text-foreground;
-  }
-
-  /* 拖拽相关的 ProseMirror 样式 */
-  .tiptap.ProseMirror {
-    padding-left: 0;
-    padding-right: 1rem;
-  }
-
-  .tiptap.ProseMirror > * {
-    margin-left: 3rem;
-  }
-
-  /* 确保拖拽后的内容可见 */
-  .tiptap.ProseMirror .ProseMirror-widget * {
-    margin-top: auto;
-  }
-
-  /* 节点范围选择样式 */
-  .ProseMirror-noderangeselection *::selection {
-    background: transparent;
-  }
-
-  .ProseMirror-noderangeselection * {
-    caret-color: transparent;
-  }
-
-  /* 选中节点的高亮样式 */
-  .ProseMirror-selectednode,
-  .ProseMirror-selectednoderange {
-    position: relative;
-  }
-
-  .ProseMirror-selectednode::before,
-  .ProseMirror-selectednoderange::before {
-    position: absolute;
-    pointer-events: none;
-    z-index: -1;
-    content: '';
-    top: -0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
-    bottom: -0.25rem;
-    background-color: rgba(112, 207, 248, 0.31);
-    border-radius: 0.2rem;
-  }
-
-  /* Dropcursor 样式 - 拖放时显示的光标指示器 */
-  .ProseMirror-dropcursor {
-    @apply border-l-2 border-primary;
-    pointer-events: none;
-    position: absolute;
-    height: 1.2em;
-    margin-top: -0.1em;
   }
 }
