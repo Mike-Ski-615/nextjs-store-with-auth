@@ -4,7 +4,7 @@ import { toast } from "sonner"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { FileText, PlusIcon } from "lucide-react"
-import { useQuery, useMutation } from "@tanstack/react-query"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { useTRPC } from "@/trpc/client"
 import { Button } from "@/components/ui/button"
@@ -15,13 +15,14 @@ import { EditDialog } from "@/components/documents/dialogs/edit-dialog"
 import { ShareDialog } from "@/components/documents/dialogs/share-dialog"
 import { CreateDialog } from "@/components/documents/dialogs/create-dialog"
 
-interface DocumentListClientProps {
-  initialDocuments: any[]
-}
+interface DocumentListClientProps {}
 
-export function DocumentListClient({ initialDocuments }: DocumentListClientProps) {
+export function DocumentListClient({}: DocumentListClientProps) {
   const router = useRouter()
   const trpc = useTRPC()
+  const queryClient = useQueryClient()
+
+  const invalidateList = () => queryClient.invalidateQueries(trpc.docs.list.queryOptions())
 
   const [createOpen, setCreateOpen] = useState(false)
   const [editOpen, setEditOpen] = useState(false)
@@ -29,15 +30,14 @@ export function DocumentListClient({ initialDocuments }: DocumentListClientProps
   const [shareOpen, setShareOpen] = useState(false)
   const [shareDoc, setShareDoc] = useState<{ id: string; filename: string } | null>(null)
 
-  const { data, refetch } = useQuery({
+  const { data } = useQuery({
     ...trpc.docs.list.queryOptions(),
-    initialData: { documents: initialDocuments },
   })
   const documents = data?.documents ?? []
 
   const deleteMutation = useMutation({
     ...trpc.docs.delete.mutationOptions(),
-    onSuccess: () => { toast.success("文档已删除"); refetch() },
+    onSuccess: () => { toast.success("文档已删除"); invalidateList() },
     onError: (error) => toast.error(error.message),
   })
 
@@ -50,13 +50,13 @@ export function DocumentListClient({ initialDocuments }: DocumentListClientProps
           创建您的第一个协作文档，开始与团队成员实时协作编辑
         </p>
         <Button onClick={() => setCreateOpen(true)}>
-          <PlusIcon className="mr-2 h-4 w-4" />
+          <PlusIcon  />
           新建文档
         </Button>
         <CreateDialog
           open={createOpen}
           onOpenChange={setCreateOpen}
-          onSuccess={() => { refetch(); setCreateOpen(false) }}
+          onSuccess={() => { invalidateList(); setCreateOpen(false) }}
         />
       </div>
     )
@@ -80,13 +80,13 @@ export function DocumentListClient({ initialDocuments }: DocumentListClientProps
       <CreateDialog
         open={createOpen}
         onOpenChange={setCreateOpen}
-        onSuccess={() => { refetch(); setCreateOpen(false) }}
+        onSuccess={() => { invalidateList(); setCreateOpen(false) }}
       />
       <EditDialog
         open={editOpen}
         onOpenChange={setEditOpen}
         document={editDoc}
-        onSuccess={() => { refetch(); setEditOpen(false) }}
+        onSuccess={() => { invalidateList(); setEditOpen(false) }}
       />
       <ShareDialog
         open={shareOpen}

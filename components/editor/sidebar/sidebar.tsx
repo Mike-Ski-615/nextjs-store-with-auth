@@ -1,7 +1,7 @@
 import { Editor } from "@tiptap/react"
 
 import { CharactersCount } from "./buttons/characters-count"
-import { SaveIndicator } from "./save-indicator"
+import { SaveIndicator } from "./buttons/save-indicator"
 
 interface SidebarProps {
   editor: Editor

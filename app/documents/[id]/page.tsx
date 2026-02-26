@@ -1,6 +1,5 @@
-import { trpc } from "@/trpc/server"
-
 import { EditorShell } from "./editor-shell"
+import { Room } from "./Room"
 
 export default async function DocumentPage({
   params
@@ -8,14 +7,10 @@ export default async function DocumentPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const caller = await trpc()
-  const { document } = await caller.docs.getById({ id })
 
   return (
-    <EditorShell
-      documentId={document.id}
-      filename={document.filename}
-      initialContent={document.yjsState}
-    />
+    <Room roomId={id}>
+      <EditorShell />
+    </Room>
   )
 }

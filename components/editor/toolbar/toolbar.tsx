@@ -29,7 +29,7 @@ import { TaskListOperationsDropdown } from "@/components/editor/toolbar/buttons/
 
 export function Toolbar({ editor }: { editor: Editor }) {
   return (
-    <div className="flex items-center gap-1 p-1 border-b flex-wrap overflow-x-auto">
+    <div className="flex items-center gap-1 p-1 border-y flex-wrap overflow-x-auto">
       {/* 撤销/重做 - button 类型（独立按钮） */}
       <UndoRedoButton editor={editor} />
 

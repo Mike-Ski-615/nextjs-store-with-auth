@@ -55,10 +55,8 @@ export const starterKitExtension = StarterKit.configure({
         "font-bold text-foreground mt-6 mb-4 first:mt-0",
     },
   },
-  undoRedo: {
-    depth: 100,
-    newGroupDelay: 500,
-  },
+  // 禁用 StarterKit 的 undoRedo，由 Liveblocks 协作扩展接管
+  undoRedo: false,
   horizontalRule: {
     HTMLAttributes: {
       class: "border-0 border-t-2 border-border my-8",

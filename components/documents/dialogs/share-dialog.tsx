@@ -1,6 +1,6 @@
 "use client";
 
-import { env } from "process";
+
 import { useRef } from "react";
 import { toast } from "sonner";
 import { Copy } from "lucide-react";
@@ -29,11 +29,13 @@ export function ShareDialog({
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const shareUrl = `${env.BETTER_AUTH_URL}/documents/${documentId}`;
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/documents/${documentId}`
+    : `http://localhost:3000/documents/${documentId}`;
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(shareUrl);
+      await navigator.clipboard.writeText(baseUrl);
       toast.success("链接已复制到剪贴板");
     } catch {
       inputRef.current?.select();
@@ -49,9 +51,17 @@ export function ShareDialog({
           <DialogDescription>分享「{documentName}」给其他人</DialogDescription>
         </DialogHeader>
         <div className="flex flex-col items-center gap-6 py-4">
-          <QRCodeSVG value={shareUrl} size={360} level="M" />
+          <div className="rounded-2xl border-2 border-violet-200 bg-linear-to-br from-violet-50 to-indigo-50 p-4 shadow-md shadow-violet-100">
+            <QRCodeSVG
+              value={baseUrl}
+              size={200}
+              level="M"
+              fgColor="#4f46e5"
+              bgColor="transparent"
+            />
+          </div>
           <div className="flex w-full items-center gap-2">
-            <Input ref={inputRef} value={shareUrl} readOnly />
+            <Input ref={inputRef} value={baseUrl} readOnly />
             <Button variant="outline" size="icon" onClick={handleCopy}>
               <Copy className="h-4 w-4" />
             </Button>

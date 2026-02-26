@@ -1,7 +1,8 @@
 import { cache } from 'react';
 import { ZodError } from 'zod';
 import superjson from 'superjson';
-import { initTRPC, TRPCError } from '@trpc/server';
+import { headers } from 'next/headers';
+import { initTRPC } from '@trpc/server';
 
 import { auth } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
@@ -11,10 +12,8 @@ import { prisma } from '@/lib/prisma';
  * @see: https://trpc.io/docs/server/context
  */
 export const createTRPCContext = cache(async (opts?: { headers?: Headers }) => {
-  // Get the session from better-auth
-  const session = opts?.headers 
-    ? await auth.api.getSession({ headers: opts.headers })
-    : null;
+  const requestHeaders = opts?.headers ?? (await headers());
+  const session = await auth.api.getSession({ headers: requestHeaders });
 
   return {
     session,

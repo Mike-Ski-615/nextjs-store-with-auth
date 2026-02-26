@@ -1,16 +1,15 @@
-import 'server-only'; // <-- ensure this file cannot be imported from the client
+import 'server-only';
 import { cache } from 'react';
-import { headers } from 'next/headers';
+import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query';
 
 import { createTRPCContext } from './init';
+import { makeQueryClient } from './query-client';
 import { appRouter } from './routers/_app';
 
-/**
- * Create a server-side tRPC caller for use in server components
- * This provides direct access to tRPC procedures without HTTP overhead
- */
-export const trpc = cache(async () => {
-  const headersList = await headers();
-  const ctx = await createTRPCContext({ headers: headersList });
-  return appRouter.createCaller(ctx);
+export const getQueryClient = cache(makeQueryClient);
+
+export const trpc = createTRPCOptionsProxy({
+  ctx: createTRPCContext,
+  router: appRouter,
+  queryClient: getQueryClient,
 });

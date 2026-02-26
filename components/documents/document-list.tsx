@@ -1,8 +1,15 @@
-import { trpc } from "@/trpc/server"
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query"
+
+import { trpc, getQueryClient } from "@/trpc/server"
 import { DocumentListClient } from "@/components/documents/document-list-client"
 
 export async function DocumentList() {
-  const caller = await trpc()
-  const { documents } = await caller.docs.list()
-  return <DocumentListClient initialDocuments={documents} />
+  const queryClient = getQueryClient()
+  await queryClient.prefetchQuery(trpc.docs.list.queryOptions())
+
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <DocumentListClient />
+    </HydrationBoundary>
+  )
 }
